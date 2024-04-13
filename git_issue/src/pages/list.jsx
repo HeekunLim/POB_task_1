@@ -5,33 +5,39 @@ import { useNavigate } from "react-router-dom";
 
 const List = () => {
     // number, title, user.login, comments, created_at
+    const token = "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";
     const [gitIssue, setGitIssue] = React.useState([]);
     let navigate = useNavigate();
 
     React.useEffect(()=>{
-        Axios
-            .get("https://api.github.com/repos/angular/angular-cli/issues?sort=comments-desc", {
-                headers: {Authorization: "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"},
-            })
-            .then((response) => {
-                for (let i = 0; i < response.data.length; i++){
-                    if (i === 4){
-                        let AD = {};
-                        AD.id = "cat";
-                        setGitIssue(old => [...old, AD]);
+        try {
+            Axios
+                .get("https://api.github.com/repos/angular/angular-cli/issues?sort=comments-desc", {
+                    headers: {Authorization: "token" + token},
+                })
+                .then((response) => {
+                    for (let i = 0; i < response.data.length; i++){
+                        if (i === 4){
+                            let AD = {};
+                            AD.id = "cat";
+                            setGitIssue(old => [...old, AD]);
+                        }
+
+                        let newData = {};
+                        newData.id = i;
+                        newData.number = response.data[i].number;
+                        newData.title  = response.data[i].title;
+                        newData.login = response.data[i].user.login;
+                        newData.comments = response.data[i].comments;
+                        newData.created_at = response.data[i].created_at.substr(0, 10);
+
+                        setGitIssue(old => [...old, newData]);
                     }
-
-                    let newData = {};
-                    newData.id = i;
-                    newData.number = response.data[i].number;
-                    newData.title  = response.data[i].title;
-                    newData.login = response.data[i].user.login;
-                    newData.comments = response.data[i].comments;
-                    newData.created_at = response.data[i].created_at.substr(0, 10);
-
-                    setGitIssue(old => [...old, newData]);
-                }
-            });
+                });
+        } catch(error) {
+            console.error(error);
+        }
+        
     }, [])
 
     function handleClick(number) {
