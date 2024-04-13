@@ -25,9 +25,9 @@ const List = () => {
                     newData.id = i;
                     newData.number = JSON.stringify(response.data[i].number);
                     newData.title  = JSON.stringify(response.data[i].title).replaceAll("\"", "");
-                    newData.login = JSON.stringify(response.data[i].user.login).replaceAll("\"", "");;
-                    newData.comments = JSON.stringify(response.data[i].comments).replaceAll("\"", "");;
-                    newData.created_at = JSON.stringify(response.data[i].created_at.substr(0, 10)).replaceAll("\"", "");;
+                    newData.login = JSON.stringify(response.data[i].user.login).replaceAll("\"", "");
+                    newData.comments = JSON.stringify(response.data[i].comments).replaceAll("\"", "");
+                    newData.created_at = JSON.stringify(response.data[i].created_at.substr(0, 10)).replaceAll("\"", "");
 
                     setGitIssue(old => [...old, newData]);
                 }
@@ -46,7 +46,7 @@ const List = () => {
                     return(
                         <div>
                             <a href="https://www.wanted.co.kr/">
-                                <img src={Cat} alt="" style={{width: "1000px"}}/>
+                                <img src={Cat} alt="" style={{width: "800px"}}/>
                             </a>
                         </div>                      
                     )
@@ -54,7 +54,7 @@ const List = () => {
                 else {
                     return (
                         <div>
-                            <button onClick={() => handleClick(gitIssue.number)} style={{width: "1000px"}}>
+                            <button onClick={() => handleClick(gitIssue.number)} style={{width: "800px"}}>
                                 <p key={gitIssue.id + "issue"}>{gitIssue.number}</p>
                                 <p key={gitIssue.id + "issue"}>{gitIssue.title}</p>
                                 <p key={gitIssue.id + "issue"}>{gitIssue.login}</p>
