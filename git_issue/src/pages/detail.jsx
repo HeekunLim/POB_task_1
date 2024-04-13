@@ -14,13 +14,14 @@ const Detail = () => {
             })
             .then((response) => {
                 let newData = {};
-                newData.number = JSON.stringify(response.data.number);
-                newData.title  = JSON.stringify(response.data.title).replaceAll("\"", "");
-                newData.login = JSON.stringify(response.data.user.login).replaceAll("\"", "");
-                newData.comments = JSON.stringify(response.data.comments).replaceAll("\"", "");
-                newData.created_at = JSON.stringify(response.data.created_at.substr(0, 10)).replaceAll("\"", "");
-                newData.avatar_url = JSON.stringify(response.data.user.avatar_url).replaceAll("\"", "");
-                newData.body = JSON.stringify(response.data.body).replaceAll("\"", "");
+
+                newData.number = response.data.number;
+                newData.title  = response.data.title;
+                newData.login = response.data.user.login;
+                newData.comments = response.data.comments;
+                newData.created_at = response.data.created_at.substr(0, 10);
+                newData.avatar_url = response.data.user.avatar_url;
+                newData.body = response.data.body;
 
                 setGitIssue(newData);
             });
@@ -30,12 +31,12 @@ const Detail = () => {
         <div>
             <h1>디테일</h1>
             <img src={gitIssue.avatar_url} alt="" style={{width: "50px"}}/>
-            <p key={gitIssue.id + "issue"}>{gitIssue.number}</p>
-            <p key={gitIssue.id + "issue"}>{gitIssue.title}</p>
-            <p key={gitIssue.id + "issue"}>{gitIssue.login}</p>
-            <p key={gitIssue.id + "issue"}>{gitIssue.created_at}</p>
-            <p key={gitIssue.id + "issue"}>{gitIssue.comments}</p>
-            <p key={gitIssue.id + "issue"}>{gitIssue.body}</p>
+            <p>{gitIssue.number}</p>
+            <p>{gitIssue.title}</p>
+            <p>{gitIssue.login}</p>
+            <p>{gitIssue.created_at}</p>
+            <p>{gitIssue.comments}</p>
+            <p style={{ whiteSpace: "pre-line" }}>{gitIssue.body}</p>
         </div>
     );
 };

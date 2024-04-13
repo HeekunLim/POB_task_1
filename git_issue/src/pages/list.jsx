@@ -23,11 +23,11 @@ const List = () => {
 
                     let newData = {};
                     newData.id = i;
-                    newData.number = JSON.stringify(response.data[i].number);
-                    newData.title  = JSON.stringify(response.data[i].title).replaceAll("\"", "");
-                    newData.login = JSON.stringify(response.data[i].user.login).replaceAll("\"", "");
-                    newData.comments = JSON.stringify(response.data[i].comments).replaceAll("\"", "");
-                    newData.created_at = JSON.stringify(response.data[i].created_at.substr(0, 10)).replaceAll("\"", "");
+                    newData.number = response.data[i].number;
+                    newData.title  = response.data[i].title;
+                    newData.login = response.data[i].user.login;
+                    newData.comments = response.data[i].comments;
+                    newData.created_at = response.data[i].created_at.substr(0, 10);
 
                     setGitIssue(old => [...old, newData]);
                 }
@@ -44,22 +44,22 @@ const List = () => {
             {gitIssue.map((gitIssue) => {
                 if (gitIssue.id === "cat"){
                     return(
-                        <div>
-                            <a href="https://www.wanted.co.kr/">
-                                <img src={Cat} alt="" style={{width: "800px"}}/>
+                        <div key={"ad"}>
+                            <a key={"adLink"} href="https://www.wanted.co.kr/">
+                                <img key={"image"} src={Cat} alt="Wanted" style={{width: "800px"}}/>
                             </a>
                         </div>                      
                     )
                 }
                 else {
                     return (
-                        <div>
-                            <button onClick={() => handleClick(gitIssue.number)} style={{width: "800px"}}>
-                                <p key={gitIssue.id + "issue"}>{gitIssue.number}</p>
-                                <p key={gitIssue.id + "issue"}>{gitIssue.title}</p>
-                                <p key={gitIssue.id + "issue"}>{gitIssue.login}</p>
-                                <p key={gitIssue.id + "issue"}>{gitIssue.created_at}</p>
-                                <p key={gitIssue.id + "issue"}>{gitIssue.comments}</p>
+                        <div key={gitIssue.id + "issue"}>
+                            <button key={gitIssue.id + "button"} onClick={() => handleClick(gitIssue.number)} style={{width: "800px"}}>
+                                <p key={gitIssue.id + "number"}>{gitIssue.number}</p>
+                                <p key={gitIssue.id + "title"}>{gitIssue.title}</p>
+                                <p key={gitIssue.id + "login"}>{gitIssue.login}</p>
+                                <p key={gitIssue.id + "created_at"}>{gitIssue.created_at}</p>
+                                <p key={gitIssue.id + "comments"}>{gitIssue.comments}</p>
                             </button>
                         </div>
                     )
