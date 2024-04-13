@@ -1,10 +1,12 @@
 import Axios from "axios";
 import React from "react";
 import Cat from "./IMG_2126.jpg";
+import { useNavigate } from "react-router-dom";
 
 const List = () => {
     // number, title, user.login, comments, created_at
     const [gitIssue, setGitIssue] = React.useState([]);
+    let navigate = useNavigate();
 
     React.useEffect(()=>{
         Axios
@@ -20,20 +22,21 @@ const List = () => {
                     }
 
                     let newData = {};
-                    newData = {};
                     newData.id = i;
-                    newData.number = response.data[i].number;
-                    newData.title  = response.data[i].title;
-                    newData.login = response.data[i].user.login;
-                    newData.comments = response.data[i].comments;
-                    newData.created_at = response.data[i].created_at;
+                    newData.number = JSON.stringify(response.data[i].number);
+                    newData.title  = JSON.stringify(response.data[i].title).replaceAll("\"", "");
+                    newData.login = JSON.stringify(response.data[i].user.login).replaceAll("\"", "");;
+                    newData.comments = JSON.stringify(response.data[i].comments).replaceAll("\"", "");;
+                    newData.created_at = JSON.stringify(response.data[i].created_at.substr(0, 10)).replaceAll("\"", "");;
 
                     setGitIssue(old => [...old, newData]);
                 }
-
-                console.log(JSON.stringify(gitIssue));
             });
     }, [])
+
+    function handleClick(number) {
+        navigate("/detail/" + number);
+    }
 
     return (
         <div>
@@ -41,13 +44,25 @@ const List = () => {
             {gitIssue.map((gitIssue) => {
                 if (gitIssue.id === "cat"){
                     return(
-                        <a href="https://www.wanted.co.kr/">
-                            <img src={Cat} alt="" style={{width: "200px"}}/>
-                        </a>                      
+                        <div>
+                            <a href="https://www.wanted.co.kr/">
+                                <img src={Cat} alt="" style={{width: "1000px"}}/>
+                            </a>
+                        </div>                      
                     )
                 }
                 else {
-                    return <p key={gitIssue.id + "issue"}>{JSON.stringify(gitIssue)}</p>
+                    return (
+                        <div>
+                            <button onClick={() => handleClick(gitIssue.number)} style={{width: "1000px"}}>
+                                <p key={gitIssue.id + "issue"}>{gitIssue.number}</p>
+                                <p key={gitIssue.id + "issue"}>{gitIssue.title}</p>
+                                <p key={gitIssue.id + "issue"}>{gitIssue.login}</p>
+                                <p key={gitIssue.id + "issue"}>{gitIssue.created_at}</p>
+                                <p key={gitIssue.id + "issue"}>{gitIssue.comments}</p>
+                            </button>
+                        </div>
+                    )
                 }
             })}
         </div>

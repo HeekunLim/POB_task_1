@@ -8,7 +8,7 @@ const router = createBrowserRouter([
         element: <List/>
     },
     {
-        path: "/detail/:detailText",
+        path: "/detail/:gitIssueNumber",
         element: <Detail/>,
     },
 ]);
