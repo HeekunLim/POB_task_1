@@ -14,7 +14,10 @@ const Detail = () => {
         try {
             Axios
                 .get("https://api.github.com/repos/angular/angular-cli/issues/" + gitIssueNumber, {
-                    headers: {Authorization: "token" + token},
+                    headers: {
+                        Authorization: "token " + token,
+                        "Content-Type": 'application/json'
+                    },
                 })
                 .then((response) => {
                     let newData = {};
@@ -40,10 +43,10 @@ const Detail = () => {
             <div style={{width: "900px"}}>
                 {repoTitle()}
                 <div style={{display: "flex", justifyContent: "flex-start"}}>
-                    <div style={{display: "flex", alignItems: "center"}}>
+                    <div style={{display: "flex", alignItems: "center", marginRight: "10px"}}>
                         <img src={gitIssue.avatar_url} alt={gitIssue.login} style={{width: "125.97px", height: "125.97px"}}/>
                     </div>
-                    <div style={{flex: "1 0 auto", width: "774.03px"}}>
+                    <div style={{flex: "1 0 auto", width: "764.03px"}}>
                         {mainBlock(gitIssue)}
                     </div>
                 </div>

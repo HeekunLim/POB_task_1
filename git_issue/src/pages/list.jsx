@@ -16,7 +16,10 @@ const List = () => {
         try {
             Axios
                 .get("https://api.github.com/repos/angular/angular-cli/issues?sort=comments-desc", {
-                    headers: {Authorization: "token" + token},
+                    headers: {
+                        Authorization: "token " + token,
+                        "Content-Type": 'application/json'
+                    },
                 })
                 .then((response) => {
                     for (let i = 0; i < response.data.length; i++){
