@@ -8,7 +8,7 @@ const myStore = React.createContext();
 
 const List = () => {
     // number, title, user.login, comments, created_at
-    const token = "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";
+    const token = "token";
     const [gitIssue, setGitIssue] = React.useState([]);
     let navigate = useNavigate();
 
