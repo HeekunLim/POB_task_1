@@ -36,11 +36,20 @@ const Detail = () => {
     }, [])
 
     return (
-        <div style={{width: "838px"}}>
-            {repoTitle()}
-            <img src={gitIssue.avatar_url} alt="" style={{width: "50px"}}/>
-            {mainBlock(gitIssue)}
-            <ReactMarkdown>{gitIssue.body}</ReactMarkdown>
+        <div style={{ display: "flex", justifyContent: "center"}}>
+            <div style={{width: "900px"}}>
+                {repoTitle()}
+                <div style={{display: "flex", justifyContent: "flex-start"}}>
+                    <div style={{display: "flex", alignItems: "center"}}>
+                        <img src={gitIssue.avatar_url} alt={gitIssue.login} style={{width: "125.97px", height: "125.97px"}}/>
+                    </div>
+                    <div style={{flex: "1 0 auto", width: "774.03px"}}>
+                        {mainBlock(gitIssue)}
+                    </div>
+                </div>
+                <hr style={{border: "solid"}}></hr>
+                <ReactMarkdown>{gitIssue.body}</ReactMarkdown>
+            </div>
         </div>
     );
 };

@@ -54,28 +54,30 @@ const List = () => {
                     console.log(value);
 
                     return (
-                        <div style={{width: "1216px"}}>
-                            {repoTitle()}
-                            {gitIssue.map((gitIssue) => {
-                                if (gitIssue.id === "cat"){
-                                    return(
-                                        <div key={"ad"}>
-                                            <a key={"adLink"} href="https://www.wanted.co.kr/">
-                                                <img key={"image"} src={Cat} alt="Wanted" style={{width: "1216px"}}/>
-                                            </a>
-                                        </div>                      
-                                    )
-                                }
-                                else {
-                                    return (
-                                        <div key={gitIssue.id + "issue"} style={{width: "1216px"}}>
-                                            <button key={gitIssue.id + "button"} onClick={() => handleClick(gitIssue.number)} style={{width: "1216px"}}>
-                                                {mainBlock(gitIssue)}
-                                            </button>
-                                        </div>
-                                    )
-                                }
-                            })}
+                        <div style={{ display: "flex", justifyContent: "center"}}>
+                            <div style={{width: "900px"}}>
+                                {repoTitle()}
+                                {gitIssue.map((gitIssue) => {
+                                    if (gitIssue.id === "cat"){
+                                        return(
+                                            <div key={"ad"}>
+                                                <a key={"adLink"} href="https://www.wanted.co.kr/">
+                                                    <img key={"image"} src={Cat} alt="Wanted" style={{width: "900px", margin: "2px"}}/>
+                                                </a>
+                                            </div>                      
+                                        )
+                                    }
+                                    else {
+                                        return (
+                                            <div key={gitIssue.id + "issue"}>
+                                                <button key={gitIssue.id + "button"} onClick={() => handleClick(gitIssue.number)} style={{width: "900px", backgroundColor: "#e8eaea", margin: "2px"}}>
+                                                    {mainBlock(gitIssue)}
+                                                </button>
+                                            </div>
+                                        )
+                                    }
+                                })}
+                            </div>
                         </div>
                     )
                 }}
