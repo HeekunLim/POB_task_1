@@ -58,7 +58,7 @@ const List = () => {
                         <div style={{ display: "flex", justifyContent: "center"}}>
                             <div style={{width: "900px"}}>
                                 {repoTitle()}
-                                {gitIssue.map((gitIssue) => {
+                                {value.gitIssue.map((gitIssue) => {
                                     if (gitIssue.id === "cat"){
                                         return(
                                             <div key={"ad"}>
