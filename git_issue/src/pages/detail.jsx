@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { repoTitle, mainBlock } from "./headers";
 
 const Detail = () => {
     // user.avatar_url, body
@@ -17,7 +18,7 @@ const Detail = () => {
                 })
                 .then((response) => {
                     let newData = {};
-
+                    newData.id = "selected"
                     newData.number = response.data.number;
                     newData.title  = response.data.title;
                     newData.login = response.data.user.login;
@@ -35,14 +36,10 @@ const Detail = () => {
     }, [])
 
     return (
-        <div>
-            <h1>디테일</h1>
+        <div style={{width: "838px"}}>
+            {repoTitle()}
             <img src={gitIssue.avatar_url} alt="" style={{width: "50px"}}/>
-            <p>{gitIssue.number}</p>
-            <p>{gitIssue.title}</p>
-            <p>{gitIssue.login}</p>
-            <p>{gitIssue.created_at}</p>
-            <p>{gitIssue.comments}</p>
+            {mainBlock(gitIssue)}
             <ReactMarkdown>{gitIssue.body}</ReactMarkdown>
         </div>
     );

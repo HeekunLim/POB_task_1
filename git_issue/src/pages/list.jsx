@@ -2,6 +2,9 @@ import Axios from "axios";
 import React from "react";
 import Cat from "./IMG_2126.jpg";
 import { useNavigate } from "react-router-dom";
+import { repoTitle, mainBlock } from "./headers";
+
+const myStore = React.createContext();
 
 const List = () => {
     // number, title, user.login, comments, created_at
@@ -45,33 +48,39 @@ const List = () => {
     }
 
     return (
-        <div>
-            <h1>리스트</h1>
-            {gitIssue.map((gitIssue) => {
-                if (gitIssue.id === "cat"){
-                    return(
-                        <div key={"ad"}>
-                            <a key={"adLink"} href="https://www.wanted.co.kr/">
-                                <img key={"image"} src={Cat} alt="Wanted" style={{width: "800px"}}/>
-                            </a>
-                        </div>                      
-                    )
-                }
-                else {
+        <myStore.Provider value={{gitIssue, setGitIssue}}>
+            <myStore.Consumer>
+                {(value) => {
+                    console.log(value);
+
                     return (
-                        <div key={gitIssue.id + "issue"}>
-                            <button key={gitIssue.id + "button"} onClick={() => handleClick(gitIssue.number)} style={{width: "800px"}}>
-                                <p key={gitIssue.id + "number"}>{gitIssue.number}</p>
-                                <p key={gitIssue.id + "title"}>{gitIssue.title}</p>
-                                <p key={gitIssue.id + "login"}>{gitIssue.login}</p>
-                                <p key={gitIssue.id + "created_at"}>{gitIssue.created_at}</p>
-                                <p key={gitIssue.id + "comments"}>{gitIssue.comments}</p>
-                            </button>
+                        <div style={{width: "1216px"}}>
+                            {repoTitle()}
+                            {gitIssue.map((gitIssue) => {
+                                if (gitIssue.id === "cat"){
+                                    return(
+                                        <div key={"ad"}>
+                                            <a key={"adLink"} href="https://www.wanted.co.kr/">
+                                                <img key={"image"} src={Cat} alt="Wanted" style={{width: "1216px"}}/>
+                                            </a>
+                                        </div>                      
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <div key={gitIssue.id + "issue"} style={{width: "1216px"}}>
+                                            <button key={gitIssue.id + "button"} onClick={() => handleClick(gitIssue.number)} style={{width: "1216px"}}>
+                                                {mainBlock(gitIssue)}
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                            })}
                         </div>
                     )
-                }
-            })}
-        </div>
+                }}
+            </myStore.Consumer>
+        </myStore.Provider>
     );
 };
 
