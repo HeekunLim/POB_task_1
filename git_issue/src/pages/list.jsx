@@ -54,8 +54,6 @@ const List = () => {
         <myStore.Provider value={{gitIssue, setGitIssue}}>
             <myStore.Consumer>
                 {(value) => {
-                    console.log(value);
-
                     return (
                         <div style={{ display: "flex", justifyContent: "center"}}>
                             <div style={{width: "900px"}}>
