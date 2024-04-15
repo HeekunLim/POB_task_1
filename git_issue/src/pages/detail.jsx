@@ -20,15 +20,16 @@ const Detail = () => {
                     },
                 })
                 .then((response) => {
-                    let newData = {};
-                    newData.id = "selected"
-                    newData.number = response.data.number;
-                    newData.title  = response.data.title;
-                    newData.login = response.data.user.login;
-                    newData.comments = response.data.comments;
-                    newData.created_at = response.data.created_at.substr(0, 10);
-                    newData.avatar_url = response.data.user.avatar_url;
-                    newData.body = response.data.body;
+                    let newData = {
+                        id: "selected",
+                        number: response.data.number,
+                        title: response.data.title,
+                        login: response.data.user.login,
+                        comments: response.data.comments,
+                        created_at: response.data.created_at.substr(0, 10),
+                        avatar_url: response.data.user.avatar_url,
+                        body: response.data.body,
+                    };
 
                     setGitIssue(newData);
                 });

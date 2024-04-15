@@ -29,13 +29,14 @@ const List = () => {
                             setGitIssue(old => [...old, AD]);
                         }
 
-                        let newData = {};
-                        newData.id = i;
-                        newData.number = response.data[i].number;
-                        newData.title  = response.data[i].title;
-                        newData.login = response.data[i].user.login;
-                        newData.comments = response.data[i].comments;
-                        newData.created_at = response.data[i].created_at.substr(0, 10);
+                        let newData = {
+                            id: i,
+                            number: response.data[i].number,
+                            title: response.data[i].title,
+                            login: response.data[i].user.login,
+                            comments: response.data[i].comments,
+                            created_at: response.data[i].created_at.substr(0, 10),
+                        };
 
                         setGitIssue(old => [...old, newData]);
                     }
