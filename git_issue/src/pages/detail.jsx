@@ -6,7 +6,6 @@ import { repoTitle, mainBlock } from "./headers";
 
 const Detail = () => {
     // user.avatar_url, body
-    const token = "token";
     const [gitIssue, setGitIssue] = React.useState([]);
     const {gitIssueNumber} = useParams();
 
@@ -15,7 +14,7 @@ const Detail = () => {
             Axios
                 .get("https://api.github.com/repos/angular/angular-cli/issues/" + gitIssueNumber, {
                     headers: {
-                        Authorization: "token " + token,
+                        Authorization: "token " + process.env.REACT_APP_API_KEY,
                         "Content-Type": 'application/json'
                     },
                 })

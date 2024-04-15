@@ -8,7 +8,6 @@ const myStore = React.createContext();
 
 const List = () => {
     // number, title, user.login, comments, created_at
-    const token = "token";
     const [gitIssue, setGitIssue] = React.useState([]);
     let navigate = useNavigate();
 
@@ -17,7 +16,7 @@ const List = () => {
             Axios
                 .get("https://api.github.com/repos/angular/angular-cli/issues?state=open&sort=comments-desc&per_page=1000", {
                     headers: {
-                        Authorization: "token " + token,
+                        Authorization: "token " + process.env.REACT_APP_API_KEY,
                         "Content-Type": 'application/json'
                     },
                 })
