@@ -15,7 +15,7 @@ const List = () => {
     React.useEffect(()=>{
         try {
             Axios
-                .get("https://api.github.com/repos/angular/angular-cli/issues?sort=comments-desc", {
+                .get("https://api.github.com/repos/angular/angular-cli/issues?state=open&sort=comments-desc&per_page=1000", {
                     headers: {
                         Authorization: "token " + token,
                         "Content-Type": 'application/json'
