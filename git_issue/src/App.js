@@ -5,10 +5,11 @@ import myStore from "./store";
 
 function App() {
   const [gitIssue, setGitIssue] = React.useState([]);
+  const [page, setPage] = React.useState(1);
 
   return (
     <div className="App">
-      <myStore.Provider value={{ gitIssue, setGitIssue }}>
+      <myStore.Provider value={{ gitIssue, setGitIssue, page, setPage }}>
         <RouterProvider router={Router} />
       </myStore.Provider>
     </div>

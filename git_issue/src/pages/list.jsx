@@ -8,9 +8,12 @@ import Styled from "styled-components";
 
 const List = () => {
   const { gitIssue, setGitIssue } = React.useContext(myStore);
+  const { page, setPage } = React.useContext(myStore);
   let navigate = useNavigate();
 
   React.useEffect(() => {
+    setGitIssue([]);
+
     try {
       Axios.get(
         "https://api.github.com/repos/angular/angular-cli/issues?state=open&sort=comments-desc&per_page=10000",
@@ -47,6 +50,24 @@ const List = () => {
     }
   }, []);
 
+  const handleScroll = () => {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    if (scrollY + windowHeight >= documentHeight) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   function handleClick(number) {
     navigate("/detail/" + number);
   }
@@ -55,7 +76,7 @@ const List = () => {
     <Container>
       <IssueContainer>
         {repoTitle()}
-        {gitIssue.map((gitIssue) => {
+        {gitIssue.slice(0, page * 10).map((gitIssue) => {
           if (gitIssue.id === "cat") {
             return (
               <div key={"ad"}>
